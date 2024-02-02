@@ -15,9 +15,10 @@ La aplicación se divide en los siguientes componentes:
 
 ## Backend (Nodejs)
 
-- **users:** gestiona la información de los usuarios
+- **auth:** gestiona la autenticación de usuarios
+- **persons:** gestiona la información de las personas
 - **videos:** gestiona la información de los vídeos
-- **videoplus:** aplicación principal que mezcla los componentes de usuarios y vídeos
+- **videoplus:** aplicación principal que mezcla los componentes de persons, auth y vídeos
 - **shared:** módulo de código compartido para toda la aplicación
 
 # Diagramas de bases de datos
@@ -28,7 +29,7 @@ La aplicación se divide en los siguientes componentes:
 
 # Especificación de APIs
 
-## Usuarios
+## Personas
 
 - **GET /users:** listar usuarios (filtros y ordenamiento)
 - **GET /user/:slug:** ver detalles de un usuario
@@ -64,10 +65,6 @@ La aplicación se divide en los siguientes componentes:
 
 - **GET /video/:slug/comment:** mostrar comentarios de un vídeo
 - **POST /video/:slug/comment:** comentar un vídeo
-
-<br>
-
-# Algoritmos de servicios
 
 <br>
 
