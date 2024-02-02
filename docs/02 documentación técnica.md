@@ -22,6 +22,8 @@ La aplicación se divide en los siguientes componentes:
 
 # Diagramas de bases de datos
 
+[Enlace al archivo mwb](/docs/rel_diagram.mwb)
+
 <br>
 
 # Especificación de APIs
