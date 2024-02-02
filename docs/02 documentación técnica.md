@@ -18,7 +18,7 @@ La aplicación se divide en los siguientes componentes:
 - **users:** gestiona la información de los usuarios
 - **videos:** gestiona la información de los vídeos
 - **videoplus:** aplicación principal que mezcla los componentes de usuarios y vídeos
-- **shared:** módulo compartido entre usuarios y vídeos
+- **shared:** módulo de código compartido para toda la aplicación
 
 # Diagramas de bases de datos
 
