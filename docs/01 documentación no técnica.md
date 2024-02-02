@@ -71,3 +71,17 @@ Finalmente, para el aseguramiento de la calidad del software, son necesarias pru
 - Desde la página de vídeos, puede listar y ver vídeos
 - Desde la página de actualizar vídeos, puede actualizar vídeos
 - Desde la página de vídeos, puede eliminar vídeos
+
+# Look & Feel
+
+## Colores
+
+[Paleta de colores](https://coolors.co/2ec1e4-4064e8-00ec3e-ffb100-dd1a00)
+
+- **Primary:** #2EC1E4
+- **Secondary:** #4064E8
+- **Success:** #00EC3E
+- **Warning:** #FFB100
+- **Danger:** #DD1A00
+- **Light:** #f8f9fa
+- **Dark:** #343a40
