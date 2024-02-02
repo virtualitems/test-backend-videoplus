@@ -1,0 +1,16 @@
+{
+  "name": "test-backend-2",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "AlejandroCR <contacto@alejandrocr.co>",
+  "license": "ISC",
+  "main": "source/main.js",
+  "scripts": {
+    "start": "node source/main.js"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}
