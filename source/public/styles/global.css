@@ -1,0 +1,18 @@
+/*
+breakpoints
+xs ... 0
+sm ... 576px
+md ... 768px
+lg ... 992px
+xl ... 1200px
+*/
+
+:root {
+  --primary: #2EC1E4;
+  --secondary: #4064E8;
+  --success: #00EC3E;
+  --warning: #FFB100;
+  --danger: #DD1A00;
+  --light: #f8f9fa;
+  --dark: #343a40;
+}
