@@ -1,0 +1,5 @@
+# personal
+.ignore/
+
+# node
+node_modules/
