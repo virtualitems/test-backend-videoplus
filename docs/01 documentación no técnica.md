@@ -33,7 +33,7 @@ Finalmente, para el aseguramiento de la calidad del software, son necesarias pru
 
 # Casos de uso
 
-## Actor: usuario anónimo
+## Actor: usuario
 
 - Desde la página de videos, puede ver videos públicos
 - Desde la página de un vídeo, puede reproducir el vídeo
@@ -41,19 +41,17 @@ Finalmente, para el aseguramiento de la calidad del software, son necesarias pru
 - Desde la página de un vídeo, puede dar "me gusta"
 - Desde la página de un vídeo, puede ver los comentarios
 - Desde la página de un vídeo, puede comentar
+
+## Actor: usuario anónimo (+usuario)
+
 - Desde la página de un usuario, puede ver los vídeos de un usuario
-- Desde la página de vídeos mejor calificados, puede ver los vídeos mejor calificados
+- Desde la página de tendencias, puede ver los vídeos mejor calificados
 - Desde la página de registro, puede registrarse
 - Desde la página de inicio de sesión, puede iniciar sesión
 
-## Actor: usuario autenticado
+## Actor: usuario autenticado (+usuario)
 
-- Desde la página de videos, puede ver videos públicos y privados
-- Desde la página de un vídeo, puede reproducir el vídeo
-- Desde la página de un vídeo, puede ver los "me gusta"
-- Desde la página de un vídeo, puede dar "me gusta"
-- Desde la página de un vídeo, puede ver los comentarios
-- Desde la página de un vídeo, puede comentar
+- Desde la página de videos, puede ver videos privados
 - Desde la página de un usuario, puede ver los vídeos de un usuario
 - Desde la página de vídeos mejor calificados, puede ver los vídeos mejor calificados
 - Desde la página de actualización de información, puede actualizar su información
