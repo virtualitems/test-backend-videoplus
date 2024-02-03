@@ -6,3 +6,10 @@ node_modules/
 
 # mysqlworkbench
 *.mwb.bak
+
+# sqlite
+*.sqlite
+*.sqlite3
+
+# media files
+media/
