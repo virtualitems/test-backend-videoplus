@@ -89,10 +89,4 @@ module.exports = {
   create,
   update,
   destroy,
-  // profile,
-  // profileEdit,
-  // profileUpdate,
-  // register,
-  // registerCreate,
-  // relatedVideos,
 };

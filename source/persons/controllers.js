@@ -11,6 +11,7 @@ const path = require('path');
 
 // first-party dependencies
 const services = require('./services');
+const authServices = require('../auth/services');
 
 
 // GET /users
@@ -72,6 +73,8 @@ async function update(req, res) {
 
   try {
     await services.update(person, updateData);
+    const user = await authServices.find({ person_id: person.id });
+    await authServices.update(user, updateData);
     res.status(204).end();
 
   } catch (error) {
@@ -110,7 +113,11 @@ async function destroy(req, res) {
 // POST /users
 async function create(req, res) {
 
-  const {slug, name, birthdate} = req.body;
+  const slug = req.body?.slug;
+  const name = req.body?.name;
+  const birthdate = req.body?.birthdate;
+  const email = req.body?.email;
+  const password = req.body?.password;
   const avatarFile = req.file;
 
   const birthDate = new Date(birthdate);
@@ -119,7 +126,7 @@ async function create(req, res) {
   const oldAvatarPath = avatarFile.path;
   const newAvatarPath = path.join(mediaPath, 'persons', avatarFile.filename);
 
-  if (!slug || !name || !birthdate || !avatarFile) {
+  if (!slug || !name || !birthdate || !email || !password || !avatarFile) {
     res.status(400).send('Some required fields are missing');
     return;
   }
@@ -139,11 +146,17 @@ async function create(req, res) {
       }
     });
 
-    await services.create({
+    const person = await services.create({
       slug: slug,
       name: name,
       birthdate: birthDate,
       avatar: `/media/persons/${avatarFile.filename}`,
+    });
+
+    await authServices.create({
+      person_id: person.id,
+      email: email,
+      password: password,
     });
 
     res.status(201).end();
