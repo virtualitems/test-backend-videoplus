@@ -7,14 +7,19 @@
 // third-party dependencies
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 
 // first-party dependencies
 const personsApp = require('./persons/express');
 const videoplusApp = require('./videoplus/express');
 
+// directories setup
+fs.mkdirSync(path.join(__dirname, '..', 'media'), { recursive: true });
+fs.mkdirSync(path.join(__dirname, '..', 'tmp'), { recursive: true });
+
 // express app setup
 const app = express();
-const port = 3000;
+
 const appsManager = new (function() {
     const installedApps = [];
 
@@ -44,6 +49,8 @@ appsManager.install(app, 'persons', personsApp.install);
 appsManager.install(app, 'videoplus', videoplusApp.install);
 
 // run server
+const port = 3000;
+
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
 });
