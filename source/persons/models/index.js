@@ -1,5 +1,5 @@
 /**
- * @fileoverview Modelos de datos para el contexto de personas.
+ * @fileoverview Models for the persons context.
  */
 
 module.exports = {
