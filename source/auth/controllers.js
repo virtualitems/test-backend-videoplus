@@ -24,9 +24,8 @@ async function sessionStart(req, res) {
 
   const token = await services.sessionStart(user.email, person.slug);
 
-  res.send({ token });
+  res.send({ token, person: person.slug, user: user.email });
 }
-
 
 /**
  * @exports

@@ -20,6 +20,7 @@ async function list(req, res) {
 
   const ispublic = req.query?.ispublic;
   const isactive = req.query?.isactive;
+  const author = req.query?.author;
 
   const where = {};
 
@@ -31,6 +32,11 @@ async function list(req, res) {
     where.isActive = isactive === 'true';
   }
 
+  if (author) {
+    const person = await Person.findOne({ where: { slug: author } });
+    where.author_id = person.id;
+  }
+
   const videos = await services.list(where);
   res.send(videos || []);
 }
@@ -40,6 +46,11 @@ async function list(req, res) {
 async function show(req, res) {
   const slug = req.params.slug;
   const video = await services.find({ slug });
+
+  if (video === null || !video.isActive) {
+    res.status(404).end();
+    return;
+  }
 
   const author = await video.getAuthor();
 
@@ -84,7 +95,18 @@ async function update(req, res) {
   const video = await services.find({ slug });
 
   const isactive = req.body?.isactive;
-  const videoFile = req.file;
+
+  const videoFile = (
+    req.files?.file &&
+    req.files.file.length > 0 &&
+    req.files.file[0]
+  );
+
+  const thumbnailFile = (
+    req.files?.thumbnail &&
+    req.files.thumbnail.length > 0 &&
+    req.files.thumbnail[0]
+  );
 
   if (video === null) {
     res.status(404).end();
@@ -112,6 +134,22 @@ async function update(req, res) {
     });
 
     updateData.file = `/media/videoplus/${videoFile.filename}`;
+  }
+
+  if (thumbnailFile) {
+    const mediaPath = multer.paths.media;
+    const oldThumbnailPath = thumbnailFile.path;
+    const newThumbnailPath = path.join(mediaPath, 'videoplus', thumbnailFile.filename);
+
+    fs.mkdirSync(path.join(mediaPath, 'videoplus'), { recursive: true });
+
+    fs.rename(oldThumbnailPath, newThumbnailPath, (err) => {
+      if (err) {
+        throw err;
+      }
+    });
+
+    updateData.thumbnail = `/media/videoplus/${thumbnailFile.filename}`;
   }
 
   try {
@@ -164,11 +202,23 @@ async function create(req, res) {
     author
   } = req.body;
 
-  const videoFile = req.file;
+  if (!req.files?.file || req.files.file.length === 0 ||
+      !req.files?.thumbnail || req.files.thumbnail.length === 0) {
+    res.status(400).send('Some data are missing');
+    return;
+  }
+
+
+  const videoFile = req.files.file[0];
+  const thumbnailFile = req.files.thumbnail[0];
 
   const mediaPath = multer.paths.media;
+
   const oldFilePath = videoFile.path;
   const newFilePath = path.join(mediaPath, 'videoplus', videoFile.filename);
+
+  const oldThumbnailPath = thumbnailFile.path;
+  const newThumbnailPath = path.join(mediaPath, 'videoplus', thumbnailFile.filename);
 
   try {
 
@@ -180,10 +230,17 @@ async function create(req, res) {
       }
     });
 
+    fs.rename(oldThumbnailPath, newThumbnailPath, (err) => {
+      if (err) {
+        throw err;
+      }
+    });
+
     await services.create(author, {
       slug: slug,
       title: title,
       file: `/media/videoplus/${videoFile.filename}`,
+      thumbnail: `/media/videoplus/${thumbnailFile.filename}`,
       isPublic: ispublic === 'true',
     });
 
@@ -219,9 +276,19 @@ async function interactions(req, res) {
     return;
   }
 
-  const person = await Person.findOne({ where: { slug: req.authenticated.per } });
+  let person = null;
+
+  if (req.authenticated) {
+    person = await Person.findOne({ where: { slug: req.authenticated.per } });
+
+    if (person === null) {
+      res.status(401).end();
+      return;
+    }
+  }
 
   services.interactions(person, video, { like, comment });
+
   res.end();
 }
 

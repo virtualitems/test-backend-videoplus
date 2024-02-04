@@ -35,6 +35,7 @@ async function create(author, data) {
     slug: data.slug,
     title: data.title,
     file: data.file,
+    thumbnail: data.thumbnail,
     author_id: person.id,
     isPublic: data.isPublic,
     isActive: data.isActive,
@@ -53,22 +54,35 @@ async function update(model, data) {
   const ispublic = data?.ispublic;
   const isactive = data?.isactive;
   const file = data?.file;
+  const thumbnail = data?.thumbnail;
 
   if (title && slug) {
     model.setDataValue('title', title);
     model.setDataValue('slug', slug);
   }
 
-  if (isactive === 'true') {
-    model.setDataValue('isActive', true);
+  if (isactive) {
+    if (isactive === 'true') {
+      model.setDataValue('isActive', true);
+    } else {
+      model.setDataValue('isActive', false);
+    }
   }
 
-  if (ispublic === 'true') {
-    model.setDataValue('isPublic', true);
+  if (ispublic) {
+    if (ispublic === 'true') {
+      model.setDataValue('isPublic', true);
+    } else {
+      model.setDataValue('isPublic', false);
+    }
   }
 
   if (file) {
     model.setDataValue('file', file);
+  }
+
+  if (thumbnail) {
+    model.setDataValue('thumbnail', thumbnail);
   }
 
   await model.save();

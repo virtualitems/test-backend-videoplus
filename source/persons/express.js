@@ -23,14 +23,19 @@ const urls = require('./urls');
 function install(app, manager) {
 
   // static files
-  app.use(urls.media, express.static(path.join(__dirname, '..', '..', 'media', 'persons')));
+  app.use(
+    urls.media,
+    express.static(path.join(__dirname, '..', '..', 'media', 'persons'))
+  );
 
   // users
   app.get(urls.index,
+    authMiddlewares.softAuthentication,
     controllers.list
   );
 
   app.get(urls.model,
+    authMiddlewares.softAuthentication,
     controllers.show
   );
 

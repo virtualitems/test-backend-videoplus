@@ -48,14 +48,18 @@ class MongoManager {
   async saveInteraction(person, video, data) {
     try {
 
-      const like = data?.like;
       const comment = data?.comment === '' ? null : data?.comment;
 
-      await InteractionPersonVideo.updateOne(
-        { video: video.id, person: person.id },
-        { $set: { video: video.id, person: person.id, like, comment } },
-        { upsert: true }
-      );
+      if (video === null) {
+        throw new Error('Video not found');
+      }
+
+      await InteractionPersonVideo.create({
+        video: video.id,
+        person: (person === null) ? null : person.id,
+        like: 0,
+        comment
+      });
 
     } catch (error) {
       console.error('Error saving interactions:', error.message);

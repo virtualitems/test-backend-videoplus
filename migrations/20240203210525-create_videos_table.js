@@ -24,6 +24,11 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
+      thumbnail: {
+        type: Sequelize.STRING(300),
+        allowNull: false,
+        unique: true,
+      },
       is_public: {
         type: Sequelize.BOOLEAN,
         allowNull: false,

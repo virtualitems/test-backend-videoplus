@@ -17,15 +17,57 @@ async function authentication(req, res, next) {
     return;
   }
 
-  const user = await jsonwebtoken.verifyAccessToken(token);
+  try {
+    const user = await jsonwebtoken.verifyAccessToken(token);
 
-  if (!user) {
-    res.status(401).end();
+    if (!user) {
+      res.status(401).end();
+      return;
+    }
+
+    req.authenticated = user;
+    next();
+
+  } catch (error) {
+    if (error instanceof jsonwebtoken.JsonWebTokenError) {
+      res.status(401).end();
+      return;
+    } else {
+      console.error(error);
+    }
+  }
+
+}
+
+
+async function softAuthentication(req, res, next) {
+  const token = req.headers['authorization'];
+
+  if (!token) {
+    next();
     return;
   }
 
-  req.authenticated = user;
-  next();
+  try {
+    const user = await jsonwebtoken.verifyAccessToken(token);
+
+    if (!user) {
+      next();
+      return;
+    }
+
+    req.authenticated = user;
+    next();
+
+  } catch (error) {
+    if (error instanceof jsonwebtoken.JsonWebTokenError) {
+      next();
+      return;
+    } else {
+      console.error(error);
+    }
+  }
+
 }
 
 
@@ -33,5 +75,6 @@ async function authentication(req, res, next) {
  * @exports
  */
 module.exports = {
-  authentication
+  authentication,
+  softAuthentication,
 };

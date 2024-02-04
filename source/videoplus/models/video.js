@@ -18,6 +18,11 @@ const Video = sequelize.define('Video', {
     allowNull: false,
     unique: true
   },
+  thumbnail: {
+    type: DataTypes.STRING(300),
+    allowNull: false,
+    unique: true
+  },
   isPublic: {
     type: DataTypes.BOOLEAN,
     allowNull: false,

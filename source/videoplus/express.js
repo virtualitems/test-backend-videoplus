@@ -16,7 +16,6 @@ const authMiddlewares = require('../auth/middlewares');
 const controllers = require('./controllers');
 const urls = require('./urls');
 
-
 /**
  * @description Installs the videoplus context into the given express app.
  * @param {express.Application} app
@@ -29,22 +28,24 @@ function install(app, manager) {
   // videos
 
   app.get(urls.index,
+    authMiddlewares.softAuthentication,
     controllers.list
   );
 
   app.get(urls.model,
+    authMiddlewares.softAuthentication,
     controllers.show
   );
 
   app.post(urls.index,
     authMiddlewares.authentication,
-    multer.middleware.single('file'),
+    multer.middleware.fields([{ name: 'file', maxCount: 1, }, { name: 'thumbnail', maxCount: 1, }]),
     controllers.create
   );
 
   app.put(urls.model,
     authMiddlewares.authentication,
-    multer.middleware.single('file'),
+    multer.middleware.fields([{ name: 'file', maxCount: 1, }, { name: 'thumbnail', maxCount: 1, }]),
     controllers.update
   );
 
@@ -54,7 +55,7 @@ function install(app, manager) {
   );
 
   app.put(urls.interactions,
-    authMiddlewares.authentication,
+    authMiddlewares.softAuthentication,
     multer.middleware.none(),
     controllers.interactions
   );

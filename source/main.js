@@ -11,6 +11,7 @@ const fs = require('fs');
 
 // first-party dependencies
 const videoplusApp = require('./videoplus/express');
+const http = require('./shared/http');
 
 // directories setup
 fs.mkdirSync(path.join(__dirname, '..', 'media'), { recursive: true });
@@ -36,6 +37,10 @@ const appsManager = new (function() {
       installer(app, this);
     };
 });
+
+// cors
+app.options('*', http.corsMiddleware);
+app.use(http.corsMiddleware);
 
 // static files
 app.use(express.static(path.join(__dirname, 'public')));

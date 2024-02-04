@@ -20,7 +20,10 @@ const urls = require('./urls');
 function install(app, manager) {
 
   // sessions
-  app.post(urls.login, multer.middleware.none(), controllers.sessionStart);
+  app.post(urls.login,
+    multer.middleware.none(),
+    controllers.sessionStart,
+  );
 
 }
 

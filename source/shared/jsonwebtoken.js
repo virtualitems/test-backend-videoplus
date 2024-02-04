@@ -5,6 +5,9 @@
 // third-party dependencies
 const jwt = require('jsonwebtoken');
 
+const NotBeforeError = jwt.NotBeforeError;
+const JsonWebTokenError = jwt.JsonWebTokenError;
+const TokenExpiredError = jwt.TokenExpiredError;
 
 // constants
 const secret = 'mysecret';  // This must be in a .env file in a real-world scenario.
@@ -47,4 +50,7 @@ module.exports = {
   verifyAccessToken,
   decodeAccessToken,
   refreshToken,
+  NotBeforeError,
+  JsonWebTokenError,
+  TokenExpiredError,
 };
