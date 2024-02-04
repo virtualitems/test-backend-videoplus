@@ -10,7 +10,6 @@ const path = require('path');
 const fs = require('fs');
 
 // first-party dependencies
-const personsApp = require('./persons/express');
 const videoplusApp = require('./videoplus/express');
 
 // directories setup
@@ -34,7 +33,7 @@ const appsManager = new (function() {
       }
 
       installedApps.push(name);
-      installer(app)
+      installer(app, this);
     };
 });
 
@@ -45,7 +44,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/media', express.static(path.join(__dirname, 'media')));
 
 // install additional apps
-appsManager.install(app, 'persons', personsApp.install);
 appsManager.install(app, 'videoplus', videoplusApp.install);
 
 // run server
