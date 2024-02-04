@@ -42,8 +42,8 @@ async function update(model, data) {
 }
 
 
-async function sessionStart(usr, data) {
-  const token = jsonwebtoken.generateAccessToken(usr, data);
+async function sessionStart(usr, per, data) {
+  const token = jsonwebtoken.generateAccessToken(usr, per, data);
   return token;
 }
 

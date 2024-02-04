@@ -11,8 +11,8 @@ const secret = 'mysecret';  // This must be in a .env file in a real-world scena
 const time = `${60 * 60 * 24 * 7}s`;  // 1 week
 
 
-function generateAccessToken(usr, extra=null) {
-  return jwt.sign({ usr: usr, ...extra }, secret, { expiresIn: time });
+function generateAccessToken(usr, per, extra=null) {
+  return jwt.sign({ usr, per, ...extra }, secret, { expiresIn: time });
 }
 
 

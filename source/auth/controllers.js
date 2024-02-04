@@ -22,7 +22,7 @@ async function sessionStart(req, res) {
 
   const person = await user.getPerson();
 
-  const token = await services.sessionStart(person.slug, {email: user.email});
+  const token = await services.sessionStart(user.email, person.slug);
 
   res.send({ token });
 }
