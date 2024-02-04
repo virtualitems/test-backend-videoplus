@@ -5,7 +5,6 @@
 // third-party dependencies
 const { UniqueConstraintError } = require('sequelize');
 const multer = require('../shared/multer');
-const mongoose = require('../shared/mongoose');
 const fs = require('fs');
 const path = require('path');
 const { Person } = require('../persons/models');
