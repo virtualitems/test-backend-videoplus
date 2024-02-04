@@ -14,6 +14,5 @@ module.exports = {
   media: '/media/videoplus',
   index: baseUrl + '/',
   model: baseUrl + '/:slug',
-  likes: baseUrl + '/:slug/likes',
-  comments: baseUrl + '/:slug/comments',
+  interactions: baseUrl + '/:slug/interactions',
 };
