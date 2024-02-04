@@ -55,6 +55,7 @@ function install(app, manager) {
 
   app.put(urls.interactions,
     authMiddlewares.authentication,
+    multer.middleware.none(),
     controllers.interactions
   );
 

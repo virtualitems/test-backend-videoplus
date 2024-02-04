@@ -5,8 +5,10 @@
 // third-party dependencies
 const { UniqueConstraintError } = require('sequelize');
 const multer = require('../shared/multer');
+const mongoose = require('../shared/mongoose');
 const fs = require('fs');
 const path = require('path');
+const { Person } = require('../persons/models');
 
 
 // first-party dependencies
@@ -177,6 +179,25 @@ async function create(req, res) {
 
 // PUT /videos/:slug/interactions
 async function interactions(req, res) {
+  const slug = req.params.slug;
+  const like = req.body?.like;
+  const comment = req.body?.comment;
+
+  if (like === undefined && comment === undefined) {
+    res.status(400).send('Some data are missing');
+    return;
+  }
+
+  const video = await services.find({ slug });
+
+  if (video === null) {
+    res.status(404).end();
+    return;
+  }
+
+  const person = await Person.findOne({ where: { slug: req.authenticated.per } });
+
+  services.interactions(person, video, { like, comment });
   res.end();
 }
 

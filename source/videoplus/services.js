@@ -6,6 +6,7 @@
 // first-party dependencies
 const { Video } = require('./models');
 const { Person } = require('../persons/models');
+const { MongoManager } = require('../shared/mongoose');
 
 
 // services
@@ -80,6 +81,12 @@ async function destroy(model) {
 }
 
 
+async function interactions(person, video, data) {
+  const manager = new MongoManager();
+  manager.saveInteractions(person, video, data);
+}
+
+
 /**
  * @exports
  */
@@ -89,4 +96,5 @@ module.exports = {
   create,
   update,
   destroy,
+  interactions,
 };
