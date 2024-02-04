@@ -39,14 +39,15 @@ async function create(data) {
 
 async function update(model, data) {
 
+  const slug = data?.slug;
   const name = data?.name;
   const birthdate = data?.birthdate;
   const isactive = data?.isactive;
   const avatar = data.avatar;
 
-  if (data?.name) {
-    model.name = name;
-    model.slug = name.toLowerCase().replace(/\s/g, '-');
+  if (name && slug) {
+    model.setDataValue('name', name);
+    model.setDataValue('slug', slug);
   }
 
   if (birthdate) {
@@ -58,15 +59,15 @@ async function update(model, data) {
       return;
     }
 
-    model.birthdate = birthDate;
+    model.setDataValue('birthdate', birthDate);
   }
 
   if (isactive === 'true') {
-    model.isActive = true;
+    model.setDataValue('isActive', true);
   }
 
   if (avatar) {
-    model.avatar = avatar;
+    model.setDataValue('avatar', avatar);
   }
 
   await model.save();
@@ -74,7 +75,7 @@ async function update(model, data) {
 
 
 async function destroy(model) {
-  model.isActive = false;
+  model.setDataValue('isActive', false);
   await model.save();
 }
 

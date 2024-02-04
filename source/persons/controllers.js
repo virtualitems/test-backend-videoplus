@@ -129,15 +129,16 @@ async function create(req, res) {
     return;
   }
 
-  fs.mkdirSync(path.join(mediaPath, 'persons'), { recursive: true });
-
-  fs.rename(oldAvatarPath, newAvatarPath, (err) => {
-    if (err) {
-      throw err;
-    }
-  });
-
   try {
+
+    fs.mkdirSync(path.join(mediaPath, 'persons'), { recursive: true });
+
+    fs.rename(oldAvatarPath, newAvatarPath, (err) => {
+      if (err) {
+        throw err;
+      }
+    });
+
     await services.create({
       slug: slug,
       name: name,
