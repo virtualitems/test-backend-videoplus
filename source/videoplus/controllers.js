@@ -4,14 +4,15 @@
 
 // third-party dependencies
 const { UniqueConstraintError } = require('sequelize');
-const multer = require('../shared/multer');
 const fs = require('fs');
 const path = require('path');
-const { Person } = require('../persons/models');
 
 
 // first-party dependencies
 const services = require('./services');
+const { Person } = require('../persons/models');
+const multer = require('../shared/multer');
+const { MongoManager } = require('../shared/mongoose');
 
 
 // GET /videos
@@ -39,9 +40,33 @@ async function list(req, res) {
 async function show(req, res) {
   const slug = req.params.slug;
   const video = await services.find({ slug });
+
   const author = await video.getAuthor();
 
+  const mongo = new MongoManager();
+  const rawInteractions = await mongo.getInteractions({video: video.id});
+
+  const interactions = {
+    likes: 0,
+    comments: []
+  };
+
+  for (const interaction of rawInteractions) {
+    if (interaction.like) {
+      interactions.likes++;
+    }
+
+    if (typeof interaction.comment === 'string') {
+      interactions.comments.push({
+        person: await Person.findOne({ where: { id: interaction.person }, attributes: ['name', 'slug', 'avatar'] }),
+        content: interaction.comment,
+      });
+    }
+  };
+
+
   video.setDataValue('author', author);
+  video.setDataValue('interactions', interactions);
 
   if (video === null || !video.isActive) {
     res.status(404).end();

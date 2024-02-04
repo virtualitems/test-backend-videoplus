@@ -5,28 +5,21 @@
 // third-party dependencies
 const mongoose = require('mongoose');
 
+
 // constants
 const mongouri = 'mongodb://localhost:27017/videoplus';
 
+
 // models
-const VideoInteraction = mongoose.model(
-  'VideoInteraction',
+const InteractionPersonVideo = mongoose.model(
+  'InteractionPersonVideo',
   {
+    video: { type: String, default: null },
     person: { type: String, default: null },
     like: { type: Boolean, default: false },
     comment: { type: String, default: null },
   },
-  'video_interactions'
-);
-
-const PersonInteraction = mongoose.model(
-  'PersonInteraction',
-  {
-    video: { type: String, default: null },
-    like: { type: Boolean, default: false },
-    comment: { type: String, default: null },
-  },
-  'person_interactions'
+  'person_video_interactions'
 );
 
 
@@ -52,23 +45,29 @@ class MongoManager {
     }
   }
 
-  async saveInteractions(person, video, data) {
+  async saveInteraction(person, video, data) {
     try {
 
-      await PersonInteraction.updateOne(
-        { video: video.slug },
-        { $set: { video: video.slug, ...data } },
-        { upsert: true }
-      );
+      const like = data?.like;
+      const comment = data?.comment === '' ? null : data?.comment;
 
-      await VideoInteraction.updateOne(
-        { person: person.slug },
-        { $set: { person: person.slug, ...data } },
+      await InteractionPersonVideo.updateOne(
+        { video: video.id, person: person.id },
+        { $set: { video: video.id, person: person.id, like, comment } },
         { upsert: true }
       );
 
     } catch (error) {
       console.error('Error saving interactions:', error.message);
+    }
+  }
+
+  async getInteractions(filters) {
+    try {
+      const interactions = await InteractionPersonVideo.find(filters);
+      return interactions;
+    } catch (error) {
+      console.error('Error getting video interactions:', error.message);
     }
   }
 

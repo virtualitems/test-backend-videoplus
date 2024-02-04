@@ -83,7 +83,7 @@ async function destroy(model) {
 
 async function interactions(person, video, data) {
   const manager = new MongoManager();
-  manager.saveInteractions(person, video, data);
+  manager.saveInteraction(person, video, data);
 }
 
 
