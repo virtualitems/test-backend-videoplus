@@ -4,13 +4,25 @@
 
 ## Instalación
 
-Instala las dependencias de la aplicación
+1. Instala las dependencias de la aplicación
 
 ```bash
 npm install
 ```
 
-Iniciar servidor de pruebas
+2. Crea la base de datos
+
+```bash
+npm run migrate
+```
+
+3. Esta aplicación requiere mongodb para funcionar
+- La base de datos se encuentra en `mongodb://localhost:27017`
+- La base de datos se llama `videoplus`
+
+![compass](/docs/mongo.example.png)
+
+3. Iniciar servidor de pruebas
 
 ```bash
 npm start
