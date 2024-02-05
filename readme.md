@@ -22,7 +22,7 @@ npm run migrate
 
 ![compass](/docs/mongo.example.png)
 
-3. Iniciar servidor de pruebas
+4. Iniciar servidor de pruebas
 
 ```bash
 npm start
