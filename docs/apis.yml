@@ -1,0 +1,256 @@
+openapi: 3.0.3
+info:
+  title: Videoplus API
+  version: 1.0.0
+  description: Videoplus API
+  contact:
+    name: Videoplus
+    email: contacto@alejandrocr.co
+    url: https://www.alejandrocr.co
+
+paths:
+  /users/:
+    get:
+      summary: Obtener todos los usuarios
+      description: Devuelve la lista de todos los usuarios.
+      responses:
+        '200':
+          description: Lista de usuarios recuperada exitosamente.
+  /users/{username}:
+    get:
+      summary: Obtener un usuario por nombre de usuario
+      description: Devuelve la información de un usuario específico.
+      parameters:
+        - name: username
+          in: path
+          description: Nombre de usuario a recuperar
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Información del usuario recuperada exitosamente.
+        '404':
+          description: Usuario no encontrado.
+    put:
+      summary: Actualizar información de un usuario
+      description: Actualiza la información de un usuario existente.
+      parameters:
+        - name: username
+          in: path
+          description: Nombre de usuario a actualizar
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                slug:
+                  type: string
+                name:
+                  type: string
+                birthdate:
+                  type: string
+                avatar:
+                  type: string
+                  format: binary
+                isactive:
+                  type: boolean
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Información del usuario actualizada exitosamente.
+    delete:
+      summary: Eliminar un usuario
+      description: Elimina un usuario existente.
+      parameters:
+        - name: username
+          in: path
+          description: Nombre de usuario a eliminar
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Usuario eliminado exitosamente.
+        '404':
+          description: Usuario no encontrado.
+  /users/register/:
+    post:
+      summary: Registrar un nuevo usuario
+      description: Crea un nuevo usuario con la información proporcionada.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                slug:
+                  type: string
+                name:
+                  type: string
+                birthdate:
+                  type: string
+                  format: date
+                avatar:
+                  type: string
+                  format: binary
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - slug
+                - name
+                - email
+                - password
+      responses:
+        '200':
+          description: Usuario registrado exitosamente.
+  /auth/login:
+    post:
+      summary: Iniciar sesión
+      description: Inicia sesión con las credenciales proporcionadas.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - email
+                - password
+      responses:
+        '200':
+          description: Sesión iniciada exitosamente.
+  /videos/:
+    get:
+      summary: Obtener todos los videos
+      description: Devuelve la lista de todos los videos.
+      responses:
+        '200':
+          description: Lista de videos recuperada exitosamente.
+    post:
+      summary: Agregar un nuevo video
+      description: Agrega un nuevo video con la información proporcionada.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                slug:
+                  type: string
+                title:
+                  type: string
+                ispublic:
+                  type: boolean
+                author:
+                  type: string
+                file:
+                  type: string
+                  format: binary
+                thumbnail:
+                  type: string
+                  format: binary
+              required:
+                - slug
+                - title
+                - author
+                - file
+      responses:
+        '200':
+          description: Video agregado exitosamente.
+  /videos/{slug}:
+    get:
+      summary: Obtener un video por slug
+      description: Devuelve la información de un video específico.
+      parameters:
+        - name: slug
+          in: path
+          description: Slug del video a recuperar
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Información del video recuperada exitosamente.
+        '404':
+          description: Video no encontrado.
+    put:
+      summary: Actualizar información de un video
+      description: Actualiza la información de un video existente.
+      parameters:
+        - name: slug
+          in: path
+          description: Slug del video a actualizar
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Información del video actualizada exitosamente.
+    delete:
+      summary: Eliminar un video
+      description: Elimina un video existente.
+      parameters:
+        - name: slug
+          in: path
+          description: Slug del video a eliminar
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Video eliminado exitosamente.
+        '404':
+          description: Video no encontrado.
+  /videos/{slug}/interactions:
+    put:
+      summary: Agregar interacción a un video
+      description: Agrega una interacción (comentario, like, etc.) a un video existente.
+      parameters:
+        - name: slug
+          in: path
+          description: Slug del video al que se agregará la interacción
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                comment:
+                  type: string
+              required:
+                - comment
+      responses:
+        '200':
+          description: Interacción agregada exitosamente.

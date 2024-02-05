@@ -37,15 +37,12 @@ Finalmente, para el aseguramiento de la calidad del software, son necesarias pru
 
 - Desde la página de videos, puede ver videos públicos
 - Desde la página de un vídeo, puede reproducir el vídeo
-- Desde la página de un vídeo, puede ver los "me gusta"
-- Desde la página de un vídeo, puede dar "me gusta"
 - Desde la página de un vídeo, puede ver los comentarios
 - Desde la página de un vídeo, puede comentar
 
 ## Actor: usuario anónimo (+usuario)
 
 - Desde la página de un usuario, puede ver los vídeos de un usuario
-- Desde la página de tendencias, puede ver los vídeos mejor calificados
 - Desde la página de registro, puede registrarse
 - Desde la página de inicio de sesión, puede iniciar sesión
 
@@ -60,26 +57,3 @@ Finalmente, para el aseguramiento de la calidad del software, son necesarias pru
 - Desde la página de sus vídeos, puede listar sus vídeos
 - Desde la página de sus vídeos, puede eliminar sus vídeos
 - Si tiene sesión activa, al hacer clic en "cerrar sesión", puede cerrar sesión
-
-## Actor: administrador
-
-- Desde la página de usuarios, puede listar y ver usuarios
-- Desde la página de actualizar usuarios, puede actualizar usuarios
-- Desde la página de usuarios, puede eliminar usuarios
-- Desde la página de vídeos, puede listar y ver vídeos
-- Desde la página de actualizar vídeos, puede actualizar vídeos
-- Desde la página de vídeos, puede eliminar vídeos
-
-# Look & Feel
-
-## Colores
-
-[Paleta de colores](https://coolors.co/2ec1e4-4064e8-00ec3e-ffb100-dd1a00)
-
-- **Primary:** #2EC1E4
-- **Secondary:** #4064E8
-- **Success:** #00EC3E
-- **Warning:** #FFB100
-- **Danger:** #DD1A00
-- **Light:** #f8f9fa
-- **Dark:** #343a40

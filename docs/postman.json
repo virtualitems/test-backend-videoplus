@@ -1,0 +1,527 @@
+{
+	"info": {
+		"_postman_id": "e7031c25-e382-4ed7-8050-8c7a39b2eb43",
+		"name": "videoplus app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32754856"
+	},
+	"item": [
+		{
+			"name": "base",
+			"item": [
+				{
+					"name": "index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "persons",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users/mi-nombre-1707083497837",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"mi-nombre-1707083497837"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "store",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "slug",
+									"value": "john-doe",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "John Doe",
+									"type": "text"
+								},
+								{
+									"key": "birthdate",
+									"value": "2024-02-03",
+									"type": "text"
+								},
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "email",
+									"value": "eg@example.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/register/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"register",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3IiOiJqb2huLWRvZSIsImVtYWlsIjoiZWdnQGVnZy5jb20iLCJpYXQiOjE3MDcwMTk2MTIsImV4cCI6MTcwNzYyNDQxMn0.-rOU0laRPLR23DXrZixVUlMrCNJoR3OgJmcxqjP7ysg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "slug",
+									"value": "john-doe",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "John Doe",
+									"type": "text"
+								},
+								{
+									"key": "birthdate",
+									"value": "11",
+									"type": "text"
+								},
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "isactive",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "egg@egg.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "pass1234",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/john-doe",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"john-doe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "destroy",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3IiOiJqb2huLWRvZSIsImVtYWlsIjoiZWdnQGVnZy5jb20iLCJpYXQiOjE3MDcwMTk2MTIsImV4cCI6MTcwNzYyNDQxMn0.-rOU0laRPLR23DXrZixVUlMrCNJoR3OgJmcxqjP7ysg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/users/jhon-doe",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"jhon-doe"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "e@mail",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "videos",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/videos/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"videos",
+								""
+							],
+							"query": [
+								{
+									"key": "ispublic",
+									"value": "true",
+									"disabled": true
+								},
+								{
+									"key": "isactive",
+									"value": "true",
+									"disabled": true
+								},
+								{
+									"key": "author",
+									"value": "john-doee",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:3000/videos/el-mejor-video-1707082820945",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"videos",
+								"el-mejor-video-1707082820945"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "store",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3IiOiJqb2huLWRvZSIsImVtYWlsIjoiZWdnQGVnZy5jb20iLCJpYXQiOjE3MDcwMTk2MTIsImV4cCI6MTcwNzYyNDQxMn0.-rOU0laRPLR23DXrZixVUlMrCNJoR3OgJmcxqjP7ysg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "slug",
+									"value": "the-video2",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "The Video",
+									"type": "text"
+								},
+								{
+									"key": "ispublic",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "author",
+									"value": "john-doe",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "thumbnail",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/videos/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"videos",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3IiOiJlZ2dAZWdnLmNvbSIsInBlciI6ImpvaG4tZG9lIiwiaWF0IjoxNzA3MDIzNjMwLCJleHAiOjE3MDc2Mjg0MzB9.PyWlIVjN9__znRay-r3sdsNymbyKTbPO0q_MU3lHVuE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "slug",
+									"value": "the-video",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "The Video",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "ispublic",
+									"value": "true",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "isactive",
+									"value": "true",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/videos/the-video",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"videos",
+								"the-video"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "destroy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:3000/videos/the-video",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"videos",
+								"the-video"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "interact",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3IiOiJlZ2dAZWdnLmNvbSIsInBlciI6ImpvaG4tZG9lIiwiaWF0IjoxNzA3MDIzNjMwLCJleHAiOjE3MDc2Mjg0MzB9.PyWlIVjN9__znRay-r3sdsNymbyKTbPO0q_MU3lHVuE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "like",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "comment",
+									"value": "my comment doe",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/videos/the-video2/interactions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"videos",
+								"the-video2",
+								"interactions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
